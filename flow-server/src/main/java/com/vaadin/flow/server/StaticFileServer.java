@@ -93,6 +93,16 @@ public class StaticFileServer implements Serializable {
     }
 
     private URL getResource(String path) {
+        if(true) {// TODO Spring boot
+
+            URL resource = getClass().getResource(path);
+            if(resource == null) {
+                // TODO support also /static and /public
+                resource = getClass().getResource("/META-INF/resources"+path);
+            }
+            return resource;
+
+        }
         try {
             return servlet.getServletContext().getResource(path);
         } catch (MalformedURLException exception) {

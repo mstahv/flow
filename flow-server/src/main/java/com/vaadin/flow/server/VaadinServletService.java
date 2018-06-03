@@ -26,6 +26,7 @@ import java.util.Optional;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.vaadin.flow.server.webjar.WebJarServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -283,6 +284,12 @@ public class VaadinServletService extends VaadinService {
      */
     private URL getResourceInServletContextOrWebJar(String path) {
         ServletContext servletContext = getServlet().getServletContext();
+        if(true) { // TODO spring boot
+            System.err.println("Serving resource" +  path);
+            // TODO check also /static and /public
+            path = "/META-INF/resources" + path;
+            return getClass().getResource(path);
+        }
         try {
             URL url = servletContext.getResource(path);
             if (url != null) {
@@ -310,8 +317,14 @@ public class VaadinServletService extends VaadinService {
      */
     private InputStream getResourceInServletContextOrWebJarAsStream(
             String path) {
+        InputStream stream = null;
+        if(true) { // TODO spring boot
+            path = "/META-INF/resources" + path; //TODO check for static and public as well
+            System.err.println("Reading resources : " + path);
+            return getClass().getResourceAsStream(path);
+        }
         ServletContext servletContext = getServlet().getServletContext();
-        InputStream stream = servletContext.getResourceAsStream(path);
+        stream = servletContext.getResourceAsStream(path);
         if (stream != null) {
             return stream;
         }
