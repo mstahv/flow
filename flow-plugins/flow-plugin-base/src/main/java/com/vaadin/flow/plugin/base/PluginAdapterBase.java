@@ -114,7 +114,7 @@ public interface PluginAdapterBase {
      **/
     String getUseDeprecatedV14Bootstrapping();
 
-    /*
+    /**
      * Checks the debug Mode.
      *
      * @return boolean
@@ -184,10 +184,8 @@ public interface PluginAdapterBase {
     /**
      * Delegates a error-Message to a logger.
      *
-     * @param errorMessage
-     *            to be logged.
-     * @param throwable
-     *            to be logged.
+     * @param warning to be logged.
+     * @param e to be logged.
      */
     void logError(CharSequence warning, Throwable e);
 
@@ -197,7 +195,6 @@ public interface PluginAdapterBase {
      * mirror. Defaults to null which will cause the downloader to use
      * {@link NodeInstaller#DEFAULT_NODEJS_DOWNLOAD_ROOT}.
      * <p>
-     * </p>
      * Example: <code>"https://nodejs.org/dist/"</code>.
      *
      * @return nodeDownloadRoot
